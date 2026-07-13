@@ -10,43 +10,114 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PostsIndexRouteImport } from './routes/posts/index'
+import { Route as RAuthenticatedRouteImport } from './routes/r/_authenticated'
+import { Route as RAuthenticatedResumesIndexRouteImport } from './routes/r/_authenticated/resumes/index'
+import { Route as RAuthenticatedJobsIndexRouteImport } from './routes/r/_authenticated/jobs/index'
+import { Route as RAuthenticatedDashboardIndexRouteImport } from './routes/r/_authenticated/dashboard/index'
+import { Route as RAuthenticatedResumesResume_idIndexRouteImport } from './routes/r/_authenticated/resumes/$resume_id/index'
+import { Route as RAuthenticatedJobsJob_idIndexRouteImport } from './routes/r/_authenticated/jobs/$job_id/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PostsIndexRoute = PostsIndexRouteImport.update({
-  id: '/posts/',
-  path: '/posts/',
+const RAuthenticatedRoute = RAuthenticatedRouteImport.update({
+  id: '/r/_authenticated',
+  path: '/r',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/posts/index.lazy').then((d) => d.Route))
+} as any)
+const RAuthenticatedResumesIndexRoute =
+  RAuthenticatedResumesIndexRouteImport.update({
+    id: '/resumes/',
+    path: '/resumes/',
+    getParentRoute: () => RAuthenticatedRoute,
+  } as any)
+const RAuthenticatedJobsIndexRoute = RAuthenticatedJobsIndexRouteImport.update({
+  id: '/jobs/',
+  path: '/jobs/',
+  getParentRoute: () => RAuthenticatedRoute,
+} as any)
+const RAuthenticatedDashboardIndexRoute =
+  RAuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => RAuthenticatedRoute,
+  } as any)
+const RAuthenticatedResumesResume_idIndexRoute =
+  RAuthenticatedResumesResume_idIndexRouteImport.update({
+    id: '/resumes/$resume_id/',
+    path: '/resumes/$resume_id/',
+    getParentRoute: () => RAuthenticatedRoute,
+  } as any)
+const RAuthenticatedJobsJob_idIndexRoute =
+  RAuthenticatedJobsJob_idIndexRouteImport.update({
+    id: '/jobs/$job_id/',
+    path: '/jobs/$job_id/',
+    getParentRoute: () => RAuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/posts/': typeof PostsIndexRoute
+  '/r': typeof RAuthenticatedRouteWithChildren
+  '/r/dashboard/': typeof RAuthenticatedDashboardIndexRoute
+  '/r/jobs/': typeof RAuthenticatedJobsIndexRoute
+  '/r/resumes/': typeof RAuthenticatedResumesIndexRoute
+  '/r/jobs/$job_id/': typeof RAuthenticatedJobsJob_idIndexRoute
+  '/r/resumes/$resume_id/': typeof RAuthenticatedResumesResume_idIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/posts': typeof PostsIndexRoute
+  '/r': typeof RAuthenticatedRouteWithChildren
+  '/r/dashboard': typeof RAuthenticatedDashboardIndexRoute
+  '/r/jobs': typeof RAuthenticatedJobsIndexRoute
+  '/r/resumes': typeof RAuthenticatedResumesIndexRoute
+  '/r/jobs/$job_id': typeof RAuthenticatedJobsJob_idIndexRoute
+  '/r/resumes/$resume_id': typeof RAuthenticatedResumesResume_idIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/posts/': typeof PostsIndexRoute
+  '/r/_authenticated': typeof RAuthenticatedRouteWithChildren
+  '/r/_authenticated/dashboard/': typeof RAuthenticatedDashboardIndexRoute
+  '/r/_authenticated/jobs/': typeof RAuthenticatedJobsIndexRoute
+  '/r/_authenticated/resumes/': typeof RAuthenticatedResumesIndexRoute
+  '/r/_authenticated/jobs/$job_id/': typeof RAuthenticatedJobsJob_idIndexRoute
+  '/r/_authenticated/resumes/$resume_id/': typeof RAuthenticatedResumesResume_idIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/posts/'
+  fullPaths:
+    | '/'
+    | '/r'
+    | '/r/dashboard/'
+    | '/r/jobs/'
+    | '/r/resumes/'
+    | '/r/jobs/$job_id/'
+    | '/r/resumes/$resume_id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/posts'
-  id: '__root__' | '/' | '/posts/'
+  to:
+    | '/'
+    | '/r'
+    | '/r/dashboard'
+    | '/r/jobs'
+    | '/r/resumes'
+    | '/r/jobs/$job_id'
+    | '/r/resumes/$resume_id'
+  id:
+    | '__root__'
+    | '/'
+    | '/r/_authenticated'
+    | '/r/_authenticated/dashboard/'
+    | '/r/_authenticated/jobs/'
+    | '/r/_authenticated/resumes/'
+    | '/r/_authenticated/jobs/$job_id/'
+    | '/r/_authenticated/resumes/$resume_id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PostsIndexRoute: typeof PostsIndexRoute
+  RAuthenticatedRoute: typeof RAuthenticatedRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -58,19 +129,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/posts/': {
-      id: '/posts/'
-      path: '/posts'
-      fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexRouteImport
+    '/r/_authenticated': {
+      id: '/r/_authenticated'
+      path: '/r'
+      fullPath: '/r'
+      preLoaderRoute: typeof RAuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/r/_authenticated/resumes/': {
+      id: '/r/_authenticated/resumes/'
+      path: '/resumes'
+      fullPath: '/r/resumes/'
+      preLoaderRoute: typeof RAuthenticatedResumesIndexRouteImport
+      parentRoute: typeof RAuthenticatedRoute
+    }
+    '/r/_authenticated/jobs/': {
+      id: '/r/_authenticated/jobs/'
+      path: '/jobs'
+      fullPath: '/r/jobs/'
+      preLoaderRoute: typeof RAuthenticatedJobsIndexRouteImport
+      parentRoute: typeof RAuthenticatedRoute
+    }
+    '/r/_authenticated/dashboard/': {
+      id: '/r/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/r/dashboard/'
+      preLoaderRoute: typeof RAuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof RAuthenticatedRoute
+    }
+    '/r/_authenticated/resumes/$resume_id/': {
+      id: '/r/_authenticated/resumes/$resume_id/'
+      path: '/resumes/$resume_id'
+      fullPath: '/r/resumes/$resume_id/'
+      preLoaderRoute: typeof RAuthenticatedResumesResume_idIndexRouteImport
+      parentRoute: typeof RAuthenticatedRoute
+    }
+    '/r/_authenticated/jobs/$job_id/': {
+      id: '/r/_authenticated/jobs/$job_id/'
+      path: '/jobs/$job_id'
+      fullPath: '/r/jobs/$job_id/'
+      preLoaderRoute: typeof RAuthenticatedJobsJob_idIndexRouteImport
+      parentRoute: typeof RAuthenticatedRoute
     }
   }
 }
 
+interface RAuthenticatedRouteChildren {
+  RAuthenticatedDashboardIndexRoute: typeof RAuthenticatedDashboardIndexRoute
+  RAuthenticatedJobsIndexRoute: typeof RAuthenticatedJobsIndexRoute
+  RAuthenticatedResumesIndexRoute: typeof RAuthenticatedResumesIndexRoute
+  RAuthenticatedJobsJob_idIndexRoute: typeof RAuthenticatedJobsJob_idIndexRoute
+  RAuthenticatedResumesResume_idIndexRoute: typeof RAuthenticatedResumesResume_idIndexRoute
+}
+
+const RAuthenticatedRouteChildren: RAuthenticatedRouteChildren = {
+  RAuthenticatedDashboardIndexRoute: RAuthenticatedDashboardIndexRoute,
+  RAuthenticatedJobsIndexRoute: RAuthenticatedJobsIndexRoute,
+  RAuthenticatedResumesIndexRoute: RAuthenticatedResumesIndexRoute,
+  RAuthenticatedJobsJob_idIndexRoute: RAuthenticatedJobsJob_idIndexRoute,
+  RAuthenticatedResumesResume_idIndexRoute:
+    RAuthenticatedResumesResume_idIndexRoute,
+}
+
+const RAuthenticatedRouteWithChildren = RAuthenticatedRoute._addFileChildren(
+  RAuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PostsIndexRoute: PostsIndexRoute,
+  RAuthenticatedRoute: RAuthenticatedRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
