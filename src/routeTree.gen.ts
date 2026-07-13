@@ -11,11 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RAuthenticatedRouteImport } from './routes/r/_authenticated'
-import { Route as RAuthenticatedResumesIndexRouteImport } from './routes/r/_authenticated/resumes/index'
-import { Route as RAuthenticatedJobsIndexRouteImport } from './routes/r/_authenticated/jobs/index'
-import { Route as RAuthenticatedDashboardIndexRouteImport } from './routes/r/_authenticated/dashboard/index'
-import { Route as RAuthenticatedResumesResume_idIndexRouteImport } from './routes/r/_authenticated/resumes/$resume_id/index'
-import { Route as RAuthenticatedJobsJob_idIndexRouteImport } from './routes/r/_authenticated/jobs/$job_id/index'
+import { Route as RAuthenticatedSidebarRouteImport } from './routes/r/_authenticated/_sidebar'
+import { Route as RAuthenticatedSidebarResumesIndexRouteImport } from './routes/r/_authenticated/_sidebar/resumes/index'
+import { Route as RAuthenticatedSidebarJobsIndexRouteImport } from './routes/r/_authenticated/_sidebar/jobs/index'
+import { Route as RAuthenticatedSidebarDashboardIndexRouteImport } from './routes/r/_authenticated/_sidebar/dashboard/index'
+import { Route as RAuthenticatedSidebarResumesResume_idIndexRouteImport } from './routes/r/_authenticated/_sidebar/resumes/$resume_id/index'
+import { Route as RAuthenticatedSidebarJobsJob_idIndexRouteImport } from './routes/r/_authenticated/_sidebar/jobs/$job_id/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -27,63 +28,69 @@ const RAuthenticatedRoute = RAuthenticatedRouteImport.update({
   path: '/r',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RAuthenticatedResumesIndexRoute =
-  RAuthenticatedResumesIndexRouteImport.update({
-    id: '/resumes/',
-    path: '/resumes/',
-    getParentRoute: () => RAuthenticatedRoute,
-  } as any)
-const RAuthenticatedJobsIndexRoute = RAuthenticatedJobsIndexRouteImport.update({
-  id: '/jobs/',
-  path: '/jobs/',
+const RAuthenticatedSidebarRoute = RAuthenticatedSidebarRouteImport.update({
+  id: '/_sidebar',
   getParentRoute: () => RAuthenticatedRoute,
 } as any)
-const RAuthenticatedDashboardIndexRoute =
-  RAuthenticatedDashboardIndexRouteImport.update({
+const RAuthenticatedSidebarResumesIndexRoute =
+  RAuthenticatedSidebarResumesIndexRouteImport.update({
+    id: '/resumes/',
+    path: '/resumes/',
+    getParentRoute: () => RAuthenticatedSidebarRoute,
+  } as any)
+const RAuthenticatedSidebarJobsIndexRoute =
+  RAuthenticatedSidebarJobsIndexRouteImport.update({
+    id: '/jobs/',
+    path: '/jobs/',
+    getParentRoute: () => RAuthenticatedSidebarRoute,
+  } as any)
+const RAuthenticatedSidebarDashboardIndexRoute =
+  RAuthenticatedSidebarDashboardIndexRouteImport.update({
     id: '/dashboard/',
     path: '/dashboard/',
-    getParentRoute: () => RAuthenticatedRoute,
+    getParentRoute: () => RAuthenticatedSidebarRoute,
   } as any)
-const RAuthenticatedResumesResume_idIndexRoute =
-  RAuthenticatedResumesResume_idIndexRouteImport.update({
+const RAuthenticatedSidebarResumesResume_idIndexRoute =
+  RAuthenticatedSidebarResumesResume_idIndexRouteImport.update({
     id: '/resumes/$resume_id/',
     path: '/resumes/$resume_id/',
-    getParentRoute: () => RAuthenticatedRoute,
+    getParentRoute: () => RAuthenticatedSidebarRoute,
   } as any)
-const RAuthenticatedJobsJob_idIndexRoute =
-  RAuthenticatedJobsJob_idIndexRouteImport.update({
+const RAuthenticatedSidebarJobsJob_idIndexRoute =
+  RAuthenticatedSidebarJobsJob_idIndexRouteImport.update({
     id: '/jobs/$job_id/',
     path: '/jobs/$job_id/',
-    getParentRoute: () => RAuthenticatedRoute,
+    getParentRoute: () => RAuthenticatedSidebarRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/r': typeof RAuthenticatedRouteWithChildren
-  '/r/dashboard/': typeof RAuthenticatedDashboardIndexRoute
-  '/r/jobs/': typeof RAuthenticatedJobsIndexRoute
-  '/r/resumes/': typeof RAuthenticatedResumesIndexRoute
-  '/r/jobs/$job_id/': typeof RAuthenticatedJobsJob_idIndexRoute
-  '/r/resumes/$resume_id/': typeof RAuthenticatedResumesResume_idIndexRoute
+  '/r': typeof RAuthenticatedSidebarRouteWithChildren
+  '/r/dashboard/': typeof RAuthenticatedSidebarDashboardIndexRoute
+  '/r/jobs/': typeof RAuthenticatedSidebarJobsIndexRoute
+  '/r/resumes/': typeof RAuthenticatedSidebarResumesIndexRoute
+  '/r/jobs/$job_id/': typeof RAuthenticatedSidebarJobsJob_idIndexRoute
+  '/r/resumes/$resume_id/': typeof RAuthenticatedSidebarResumesResume_idIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/r': typeof RAuthenticatedRouteWithChildren
-  '/r/dashboard': typeof RAuthenticatedDashboardIndexRoute
-  '/r/jobs': typeof RAuthenticatedJobsIndexRoute
-  '/r/resumes': typeof RAuthenticatedResumesIndexRoute
-  '/r/jobs/$job_id': typeof RAuthenticatedJobsJob_idIndexRoute
-  '/r/resumes/$resume_id': typeof RAuthenticatedResumesResume_idIndexRoute
+  '/r': typeof RAuthenticatedSidebarRouteWithChildren
+  '/r/dashboard': typeof RAuthenticatedSidebarDashboardIndexRoute
+  '/r/jobs': typeof RAuthenticatedSidebarJobsIndexRoute
+  '/r/resumes': typeof RAuthenticatedSidebarResumesIndexRoute
+  '/r/jobs/$job_id': typeof RAuthenticatedSidebarJobsJob_idIndexRoute
+  '/r/resumes/$resume_id': typeof RAuthenticatedSidebarResumesResume_idIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/r/_authenticated': typeof RAuthenticatedRouteWithChildren
-  '/r/_authenticated/dashboard/': typeof RAuthenticatedDashboardIndexRoute
-  '/r/_authenticated/jobs/': typeof RAuthenticatedJobsIndexRoute
-  '/r/_authenticated/resumes/': typeof RAuthenticatedResumesIndexRoute
-  '/r/_authenticated/jobs/$job_id/': typeof RAuthenticatedJobsJob_idIndexRoute
-  '/r/_authenticated/resumes/$resume_id/': typeof RAuthenticatedResumesResume_idIndexRoute
+  '/r/_authenticated/_sidebar': typeof RAuthenticatedSidebarRouteWithChildren
+  '/r/_authenticated/_sidebar/dashboard/': typeof RAuthenticatedSidebarDashboardIndexRoute
+  '/r/_authenticated/_sidebar/jobs/': typeof RAuthenticatedSidebarJobsIndexRoute
+  '/r/_authenticated/_sidebar/resumes/': typeof RAuthenticatedSidebarResumesIndexRoute
+  '/r/_authenticated/_sidebar/jobs/$job_id/': typeof RAuthenticatedSidebarJobsJob_idIndexRoute
+  '/r/_authenticated/_sidebar/resumes/$resume_id/': typeof RAuthenticatedSidebarResumesResume_idIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,11 +115,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/r/_authenticated'
-    | '/r/_authenticated/dashboard/'
-    | '/r/_authenticated/jobs/'
-    | '/r/_authenticated/resumes/'
-    | '/r/_authenticated/jobs/$job_id/'
-    | '/r/_authenticated/resumes/$resume_id/'
+    | '/r/_authenticated/_sidebar'
+    | '/r/_authenticated/_sidebar/dashboard/'
+    | '/r/_authenticated/_sidebar/jobs/'
+    | '/r/_authenticated/_sidebar/resumes/'
+    | '/r/_authenticated/_sidebar/jobs/$job_id/'
+    | '/r/_authenticated/_sidebar/resumes/$resume_id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -136,59 +144,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RAuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/r/_authenticated/resumes/': {
-      id: '/r/_authenticated/resumes/'
+    '/r/_authenticated/_sidebar': {
+      id: '/r/_authenticated/_sidebar'
+      path: ''
+      fullPath: '/r'
+      preLoaderRoute: typeof RAuthenticatedSidebarRouteImport
+      parentRoute: typeof RAuthenticatedRoute
+    }
+    '/r/_authenticated/_sidebar/resumes/': {
+      id: '/r/_authenticated/_sidebar/resumes/'
       path: '/resumes'
       fullPath: '/r/resumes/'
-      preLoaderRoute: typeof RAuthenticatedResumesIndexRouteImport
-      parentRoute: typeof RAuthenticatedRoute
+      preLoaderRoute: typeof RAuthenticatedSidebarResumesIndexRouteImport
+      parentRoute: typeof RAuthenticatedSidebarRoute
     }
-    '/r/_authenticated/jobs/': {
-      id: '/r/_authenticated/jobs/'
+    '/r/_authenticated/_sidebar/jobs/': {
+      id: '/r/_authenticated/_sidebar/jobs/'
       path: '/jobs'
       fullPath: '/r/jobs/'
-      preLoaderRoute: typeof RAuthenticatedJobsIndexRouteImport
-      parentRoute: typeof RAuthenticatedRoute
+      preLoaderRoute: typeof RAuthenticatedSidebarJobsIndexRouteImport
+      parentRoute: typeof RAuthenticatedSidebarRoute
     }
-    '/r/_authenticated/dashboard/': {
-      id: '/r/_authenticated/dashboard/'
+    '/r/_authenticated/_sidebar/dashboard/': {
+      id: '/r/_authenticated/_sidebar/dashboard/'
       path: '/dashboard'
       fullPath: '/r/dashboard/'
-      preLoaderRoute: typeof RAuthenticatedDashboardIndexRouteImport
-      parentRoute: typeof RAuthenticatedRoute
+      preLoaderRoute: typeof RAuthenticatedSidebarDashboardIndexRouteImport
+      parentRoute: typeof RAuthenticatedSidebarRoute
     }
-    '/r/_authenticated/resumes/$resume_id/': {
-      id: '/r/_authenticated/resumes/$resume_id/'
+    '/r/_authenticated/_sidebar/resumes/$resume_id/': {
+      id: '/r/_authenticated/_sidebar/resumes/$resume_id/'
       path: '/resumes/$resume_id'
       fullPath: '/r/resumes/$resume_id/'
-      preLoaderRoute: typeof RAuthenticatedResumesResume_idIndexRouteImport
-      parentRoute: typeof RAuthenticatedRoute
+      preLoaderRoute: typeof RAuthenticatedSidebarResumesResume_idIndexRouteImport
+      parentRoute: typeof RAuthenticatedSidebarRoute
     }
-    '/r/_authenticated/jobs/$job_id/': {
-      id: '/r/_authenticated/jobs/$job_id/'
+    '/r/_authenticated/_sidebar/jobs/$job_id/': {
+      id: '/r/_authenticated/_sidebar/jobs/$job_id/'
       path: '/jobs/$job_id'
       fullPath: '/r/jobs/$job_id/'
-      preLoaderRoute: typeof RAuthenticatedJobsJob_idIndexRouteImport
-      parentRoute: typeof RAuthenticatedRoute
+      preLoaderRoute: typeof RAuthenticatedSidebarJobsJob_idIndexRouteImport
+      parentRoute: typeof RAuthenticatedSidebarRoute
     }
   }
 }
 
+interface RAuthenticatedSidebarRouteChildren {
+  RAuthenticatedSidebarDashboardIndexRoute: typeof RAuthenticatedSidebarDashboardIndexRoute
+  RAuthenticatedSidebarJobsIndexRoute: typeof RAuthenticatedSidebarJobsIndexRoute
+  RAuthenticatedSidebarResumesIndexRoute: typeof RAuthenticatedSidebarResumesIndexRoute
+  RAuthenticatedSidebarJobsJob_idIndexRoute: typeof RAuthenticatedSidebarJobsJob_idIndexRoute
+  RAuthenticatedSidebarResumesResume_idIndexRoute: typeof RAuthenticatedSidebarResumesResume_idIndexRoute
+}
+
+const RAuthenticatedSidebarRouteChildren: RAuthenticatedSidebarRouteChildren = {
+  RAuthenticatedSidebarDashboardIndexRoute:
+    RAuthenticatedSidebarDashboardIndexRoute,
+  RAuthenticatedSidebarJobsIndexRoute: RAuthenticatedSidebarJobsIndexRoute,
+  RAuthenticatedSidebarResumesIndexRoute:
+    RAuthenticatedSidebarResumesIndexRoute,
+  RAuthenticatedSidebarJobsJob_idIndexRoute:
+    RAuthenticatedSidebarJobsJob_idIndexRoute,
+  RAuthenticatedSidebarResumesResume_idIndexRoute:
+    RAuthenticatedSidebarResumesResume_idIndexRoute,
+}
+
+const RAuthenticatedSidebarRouteWithChildren =
+  RAuthenticatedSidebarRoute._addFileChildren(
+    RAuthenticatedSidebarRouteChildren,
+  )
+
 interface RAuthenticatedRouteChildren {
-  RAuthenticatedDashboardIndexRoute: typeof RAuthenticatedDashboardIndexRoute
-  RAuthenticatedJobsIndexRoute: typeof RAuthenticatedJobsIndexRoute
-  RAuthenticatedResumesIndexRoute: typeof RAuthenticatedResumesIndexRoute
-  RAuthenticatedJobsJob_idIndexRoute: typeof RAuthenticatedJobsJob_idIndexRoute
-  RAuthenticatedResumesResume_idIndexRoute: typeof RAuthenticatedResumesResume_idIndexRoute
+  RAuthenticatedSidebarRoute: typeof RAuthenticatedSidebarRouteWithChildren
 }
 
 const RAuthenticatedRouteChildren: RAuthenticatedRouteChildren = {
-  RAuthenticatedDashboardIndexRoute: RAuthenticatedDashboardIndexRoute,
-  RAuthenticatedJobsIndexRoute: RAuthenticatedJobsIndexRoute,
-  RAuthenticatedResumesIndexRoute: RAuthenticatedResumesIndexRoute,
-  RAuthenticatedJobsJob_idIndexRoute: RAuthenticatedJobsJob_idIndexRoute,
-  RAuthenticatedResumesResume_idIndexRoute:
-    RAuthenticatedResumesResume_idIndexRoute,
+  RAuthenticatedSidebarRoute: RAuthenticatedSidebarRouteWithChildren,
 }
 
 const RAuthenticatedRouteWithChildren = RAuthenticatedRoute._addFileChildren(
