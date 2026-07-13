@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   key: 'react-vite-stack',
   name: 'React vite stack',
   description: '',
-  logo: '',
+  logo: '/vite.svg',
   version: '0.0.3',
 };
 
