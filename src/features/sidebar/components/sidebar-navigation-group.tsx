@@ -13,17 +13,17 @@ export function SidebarAgentNavigationGroup({ navGroup }: SidebarAgentNavigation
       {navGroup.map((group) => (
         <React.Fragment key={group.id}>
           <SidebarGroup key={group.id}>
-            {group.title && <SidebarGroupLabel className='text-[10px] text-muted-foreground/70 px-3'>{group.title}</SidebarGroupLabel>}
+            {group.title && <SidebarGroupLabel>{group.title}</SidebarGroupLabel>}
             <SidebarMenu>
               {group.items.map((item) => (
                 <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton size={'default'} className='whitespace-nowrap transition-all duration-300' tooltip={item.title} asChild>
+                  <SidebarMenuButton tooltip={item.title} asChild>
                     <Link
                       {...item.linkOptions}
                       activeProps={{ className: 'bg-primary/10! text-primary! font-semibold' }}
-                      inactiveProps={{ className: 'text-muted-foreground hover:bg-muted hover:text-foreground' }}
+                      inactiveProps={{ className: 'hover:text-foreground' }}
                     >
-                      {<item.Icon className='transition-colors' />}
+                      {<item.Icon className='transition-colors' weight='duotone' />}
                       <span className='whitespace-nowrap font-medium'>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>

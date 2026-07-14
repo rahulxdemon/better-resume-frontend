@@ -1,5 +1,5 @@
+import { CardsThreeIcon, FolderUserIcon, ReadCvLogoIcon } from '@phosphor-icons/react';
 import { linkOptions } from '@tanstack/react-router';
-import { LayoutDashboard } from 'lucide-react';
 import { SITE_CONFIG } from '@/config/site';
 import type { INavGroup, ISidebarHeader } from '@/features/sidebar/types/sidebar';
 
@@ -16,19 +16,19 @@ export const SIDEBAR_NAVIGATION: INavGroup[] = [
       {
         id: 'dashboard',
         title: 'Dashboard',
-        Icon: LayoutDashboard,
+        Icon: CardsThreeIcon,
         linkOptions: linkOptions({ to: '/r/dashboard' }),
       },
       {
         id: 'jobs',
         title: 'Jobs',
-        Icon: LayoutDashboard,
+        Icon: FolderUserIcon,
         linkOptions: linkOptions({ to: '/r/jobs' }),
       },
       {
         id: 'resumes',
         title: 'Resumes',
-        Icon: LayoutDashboard,
+        Icon: ReadCvLogoIcon,
         linkOptions: linkOptions({ to: '/r/resumes' }),
       },
     ],
