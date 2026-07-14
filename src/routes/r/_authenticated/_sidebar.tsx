@@ -10,7 +10,7 @@ export const Route = createFileRoute('/r/_authenticated/_sidebar')({
 
 function RouteComponent() {
   return (
-    <TooltipProvider delayDuration={0}>
+    <TooltipProvider>
       <SidebarProvider open={false} defaultOpen={false}>
         <AppSidebar sidebarHeader={SIDEBAR_HEADER} navGroup={SIDEBAR_NAVIGATION} />
         <SidebarInset className='min-w-0'>
