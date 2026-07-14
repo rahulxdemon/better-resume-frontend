@@ -1,4 +1,4 @@
-import { CardsThreeIcon, FolderUserIcon, ReadCvLogoIcon } from '@phosphor-icons/react';
+import { CirclesThreeIcon, FolderUserIcon, ReadCvLogoIcon } from '@phosphor-icons/react';
 import { linkOptions } from '@tanstack/react-router';
 import { SITE_CONFIG } from '@/config/site';
 import type { INavGroup, ISidebarHeader } from '@/features/sidebar/types/sidebar';
@@ -16,7 +16,7 @@ export const SIDEBAR_NAVIGATION: INavGroup[] = [
       {
         id: 'dashboard',
         title: 'Dashboard',
-        Icon: CardsThreeIcon,
+        Icon: CirclesThreeIcon,
         linkOptions: linkOptions({ to: '/r/dashboard' }),
       },
       {
